@@ -1,0 +1,44 @@
+{
+  "name": "findyokids",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server/server.js",
+    "dev": "webpack -d --watch --progress --colors",
+    "build": "NODE_ENV=production webpack -p",
+    "compile": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sho13/findyokids.git"
+  },
+  "author": "Sean Ho <sean.ho.0103@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sho13/findyokids/issues"
+  },
+  "homepage": "https://github.com/sho13/findyokids#readme",
+  "dependencies": {
+    "babel-core": "6.24.1",
+    "babel-loader": "7.0.0",
+    "babel-preset-env": "1.4.0",
+    "babel-preset-react": "6.24.1",
+    "body-parser": "1.17.1",
+    "css-loader": "0.28.1",
+    "express": "4.15.2",
+    "nodemon": "1.11.0",
+    "path": "0.12.7",
+    "react": "15.5.4",
+    "react-dom": "15.5.4",
+    "react-redux": "5.0.4",
+    "redux": "3.6.0",
+    "redux-promise": "0.5.3",
+    "webpack": "2.5.1",
+    "webpack-dev-middleware": "1.10.2"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "6.24.0"
+  }
+}
