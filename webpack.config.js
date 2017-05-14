@@ -17,8 +17,27 @@ module.exports = {
         test: /\.jsx$/,
         exclude: /node_modules/,
         use: [
-          'babel-loader',
+          'babel-loader'
         ],
+      },
+      {
+        test: /\.(jpg|png|gif|svg)$/i,
+        use: [
+            'file-loader?context=client/src/images/side/[path][name].[ext]',
+            'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+      },
+      {
+        test: /\.html$/,
+        use: [
+          'html-loader?attrs[]=video:src',
+        ]
+      },
+      {
+        test: /\.mp4$/,
+        use: [
+          'file-loader',
+        ]
       },
       {
         test: /\.css$/,
