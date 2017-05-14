@@ -3,8 +3,6 @@ import axios from 'axios';
 import Slider from 'react-slick';
 import axios from 'axios';
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -44,22 +42,13 @@ class App extends Component {
     });
   }
   
+  
   render() {  
-    const settings = {
-      infinite: true,
-      autoplay: true,
-      autoplaySpeed: 5000,
-      speed: 500,
-      slidesToShow: 1000,
-      slidesToScroll: 1000,
-    }
-
-    
     return (
       <div>
-        <Slider {...settings}>
-          {this.images()}
-        </Slider>
+        <center>
+        <img src={this.state.pic} height="500" width="500" />
+        </center>
       </div>
     )
   }
