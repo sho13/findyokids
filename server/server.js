@@ -8,18 +8,21 @@ const Clarifai = require('clarifai');
 var async = require('async');
 
 const app = express();
-
+const testFolder = './images/side';
+const testFolder2 = './images/front';
+const fs = require('fs');
 
 app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({
   extended:true
 }));
+app.use(express.static(path.join(__dirname, '/../client/')));
+app.use(express.static(path.join(__dirname, '/../images/')));
+app.use(express.static(path.join(__dirname, '/../node_modules')));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '/../client')));
 
 app.set('view engine', 'ejs');
-
 
 const front = [
 'https://image.ibb.co/iC9385/IMG_5762.jpg',
@@ -87,7 +90,6 @@ const front = [
 'https://image.ibb.co/gVN6T5/IMG_5699.jpg'
 ]
 
-
 var clarifaiApp = new Clarifai.App('sJLLnP9zyFTOBtjItyVfpqYlOE2kIo3NUN_xetmv', 'ZitJzM0PkSo6e1UHTl1tEsvj2a-qBpZn_7CrKOoO');
 
 clarifaiApp.getToken();
@@ -108,7 +110,6 @@ router.post('/sendFrame',(req,res) => {
       	console.log('noooooo')
       	res.send("no sean here...");
       }
-
     },
     function(err) {
 
@@ -122,30 +123,30 @@ router.post('/sendFrame',(req,res) => {
 app.use('/', router);
 
 const port = process.env.PORT || 3001;
-app.listen(port,(err) => {
-  console.log("Listening on port " + port);
+
+const side = fs.readdirSync(testFolder).map(file => {
+  return file;
+})
+
+const front = fs.readdirSync(testFolder2).map(file => {
+  return file;
+})
+
+const image = {
+  side: side,
+  front: front,
+}
+
+app.get('/images', (req, res) => {
+  res.send(image);
+})
+
+app.listen(port, (err) => {
+  if(err) {
+    console.log('Error occurred : ', err);
+  }
+  console.log('Server is listening to port : ', port);
 });
 
 
 module.exports = app;
-
-
-
-
-// const express = require('express');
-// const path = require('path');
-// const bodyParser = require('body-parser');
-// const app = express();
-
-// app.use(express.static(path.join(__dirname, '/../client/')));
-// app.use(express.static(path.join(__dirname, '/../node_modules')));
-// app.use(bodyParser.json());
-
-// const port = process.env.PORT || 5000;
-
-// app.listen(port, (err) => {
-//   if(err) {
-//     console.log('Error occurred : ', err);
-//   }
-//   console.log('Server is listening to port : ', port);
-// });
