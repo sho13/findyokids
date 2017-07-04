@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Slider from 'react-slick';
-import axios from 'axios';
-
-
 
 class App extends Component {
   constructor(props) {
@@ -32,9 +29,27 @@ class App extends Component {
       )
     }
     return this.state.front.map((val) => {
-      axios.post('/clarifai', {front:val} )
+      axios.post('/sendFrame', { front: val } )
            .then((response) => {
-             console.log("RESSSSPONSE:", response);
+            console.log("RESSSSPONSE:", response);
+            if(response.data !== null) {
+              let api_key = 'dab5bbc0';
+              let api_secret = '7008ac711dd75f08';
+              let to = 16467449919;        //can only send it to these numbers 19739028359, 15162366339, 16467449919 ... have to register more
+              let from = 12028525488;
+              let text = response.data;
+              
+              axios.post(`https://rest.nexmo.com/sms/json?api_key=${api_key}&api_secret=${api_secret}&to=${to}&from=${from}&text=${text}`)
+                .then((res) => {
+                  return res;
+                })
+               .catch((error) => {
+                 console.log(error);
+               });
+             }
+           })
+           .catch((err) => {
+             console.log(err);
            })
       return (
         <div>
